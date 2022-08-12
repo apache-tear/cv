@@ -1,6 +1,5 @@
 resource "aws_s3_bucket" "cvbucket" {
   bucket = "cv-s3-bucket-container"
-  acl="public-read"
 }
 
 resource "aws_s3_bucket_website_configuration" "cvbucket" {
