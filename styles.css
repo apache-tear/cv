@@ -1,0 +1,61 @@
+.wrapper {
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+body {
+    background-color:rgba(252, 253, 253, 0.774)
+}
+.img-avatar {
+    width:150px;
+    padding-bottom: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: left;
+}
+
+.h1-centered {
+    text-align: center;
+    color: rgba(21, 88, 181, 0.774);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 20px;
+}
+
+.div-bio {
+    border-top: 1px solid black; 
+    padding-left: 10px; 
+    margin-right: 10px;
+    margin-bottom: 30px;
+    font-size: medium;
+}
+
+.contacts {
+    font-size: x-small;
+}
+
+.l2-label {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+
+.dates {
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.info {
+    width: 75%;
+}
+
+
+.fine-width {
+    width: 100%
+}
+
+
+.job-title {
+    font-weight: 500;
+}
