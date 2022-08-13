@@ -22,7 +22,7 @@ jobs:
          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
          role-to-assume: arn:aws:iam::267231704888:role/role_rw_shae256
          role-session-name: test
-         role-duration-seconds: 300
+         role-duration-seconds: 1000
          aws-region: 'eu-west-3'
 
       - name: checkout
