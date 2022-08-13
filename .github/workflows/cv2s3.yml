@@ -1,0 +1,31 @@
+name: cv2s3
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+    id-token: write
+    contents: read
+  
+jobs:
+  pull_request:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: configureawscredentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         role-to-assume: arn:aws:iam::267231704888:role/role_rw_shae256
+         role-session-name: test
+         role-duration-seconds: 1000
+         aws-region: 'eu-west-3'
+
+      - name: checkout
+        uses: actions/checkout@v3
+        
+      - name: s3upload
+        run: | 
+          aws s3 ls
