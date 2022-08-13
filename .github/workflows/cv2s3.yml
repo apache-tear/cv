@@ -16,8 +16,6 @@ jobs:
       - name: configureawscredentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
          role-to-assume: arn:aws:iam::267231704888:role/role_rw_shae256
          role-session-name: test
          role-duration-seconds: 1000
