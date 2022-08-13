@@ -1,6 +1,4 @@
-# This is a basic workflow to help you get started with Actions
-
-name: cicv2s3
+name: cv2s3
 
 on:
   pull_request:
@@ -18,8 +16,6 @@ jobs:
       - name: configureawscredentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
          role-to-assume: arn:aws:iam::267231704888:role/role_rw_shae256
          role-session-name: test
          role-duration-seconds: 1000
@@ -30,5 +26,4 @@ jobs:
         
       - name: s3upload
         run: | 
-          aws s3 ls
-    
+          aws s3 cp ./static s3://shae256
