@@ -19,4 +19,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Check gh secrets
         run: | 
-          gh secret set ghactionssecret
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            /orgs/rocknrolldevs/actions/secrets/test
