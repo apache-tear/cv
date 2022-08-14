@@ -19,7 +19,6 @@ jobs:
           token: ${{ env.GH_TOKEN }}
       - name: Check gh secrets
         run: | 
-          echo ${{ env.GH_TOKEN }} | gh auth login --with-token
           gh api \
             -H "Accept: application/vnd.github+json" \
             /orgs/rocknrolldevs/actions/secrets/test
