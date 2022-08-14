@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  TOKEN: ${{ secrets.MY_TOKEN }}
+  GH_TOKEN: ${{ secrets.MY_TOKEN }}
 
 jobs:
   build:
@@ -15,8 +15,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-        with:
-          token: ${{ env.TOKEN }}
       - name: Check gh secrets
         run: | 
           gh secret set new-secret
