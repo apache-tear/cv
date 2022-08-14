@@ -3,17 +3,15 @@
 name: test_secret
 
 on:
-  workflow_dispatch:
-  
   workflow_call:
     secrets:
       GITHUB_TOKEN:
         description: 'GH token'
         required: false
 
-env:
-  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+on:
+  workflow_dispatch:
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,7 +19,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: One-line script
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check gh secrets
         run: | 
           gh secret list
