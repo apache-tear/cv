@@ -5,8 +5,6 @@ name: test_secret
 on:
   workflow_dispatch:
 
-env:
-    GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   build:
