@@ -4,9 +4,15 @@ name: test_secret
 
 on:
   workflow_dispatch:
+  
+  workflow_call:
+    secrets:
+      GITHUB_TOKEN:
+        description: 'GH token'
+        required: false
 
 env:
-    GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   build:
