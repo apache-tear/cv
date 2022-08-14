@@ -1,0 +1,17 @@
+#checking secrets
+
+name: test_secret
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: One-line script
+        run: | 
+          gh secret list
