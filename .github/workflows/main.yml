@@ -19,5 +19,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Check gh secrets
         run: | 
-          echo "$(env.AWS_ACCESS_KEY_ID)"
-          echo "$(env.devenv.test)"
+          gh --version
