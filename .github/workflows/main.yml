@@ -3,13 +3,6 @@
 name: test_secret
 
 on:
-  workflow_call:
-    secrets:
-      GITHUB_TOKEN:
-        description: 'GH token'
-        required: false
-
-on:
   workflow_dispatch:
   
 jobs:
