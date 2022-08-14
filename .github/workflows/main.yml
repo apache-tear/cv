@@ -1,12 +1,10 @@
-#checking secrets
-
 name: test_secret
 
 on:
   workflow_dispatch:
 
 env:
-    GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_TOKEN: ${{ secrets.MY_TOKEN }}
 
 jobs:
   build:
@@ -15,7 +13,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: One-line script
+      - name: Raise VM
         run: | 
-          gh secret list
+          
+      
+      - name: Raise vm
+        run: | 
+          gh secret set secret-name < secret.txt
