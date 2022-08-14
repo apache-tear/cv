@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-    GH_TOKEN: ${{ secrets.MY_TOKEN }}
+  TOKEN: ${{ secrets.MY_TOKEN }}
 
 jobs:
   build:
@@ -16,9 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          token: ${{ env.GH_TOKEN }}
+          token: ${{ env.TOKEN }}
       - name: Check gh secrets
         run: | 
-          gh api \
-            -H "Accept: application/vnd.github+json" \
-            /orgs/rocknrolldevs/actions/secrets/test
+          gh secret set new-secret
