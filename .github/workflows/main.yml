@@ -19,4 +19,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Check gh secrets
         run: | 
-          gh secret set ghactionssecret 12345
+          gh secret set ghactionssecret
