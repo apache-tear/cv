@@ -1,5 +1,20 @@
+variable "bucket_name" {
+  type = string
+}
+
+data "aws_s3_bucket" "cvbucket" {
+  bucket = "${var.bucket_name}"
+}
+
 resource "aws_s3_bucket" "cvbucket" {
-  bucket = "cv-s3-bucket-container"
+  bucket = "${var.bucket_name}"
+}
+
+resource "aws_s3_bucket_versioning" "versioning_enabled" {
+  bucket = aws_s3_bucket.cvbucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
 }
 
 resource "aws_s3_bucket_website_configuration" "cvbucket" {
