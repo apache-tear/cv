@@ -24,5 +24,14 @@ provider "aws" {
 }
 
 module "s3" {
-  source = "./s3/main.tf"
+  source = "./modules/s3"
+  bucket_name = "${var.bucket_name}"
+}
+
+module "ec2" {
+  source = "./modules/ec2"
+}
+
+module "pk" {
+  source = "./modules/pk"
 }
