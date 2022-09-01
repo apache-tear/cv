@@ -17,8 +17,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
          role-to-assume: arn:aws:iam::267231704888:role/role_rw_shae256
-         role-session-name: test
-         role-duration-seconds: 1000
+         role-session-name: delivery
+         role-duration-seconds: 100
          aws-region: 'eu-west-3'
 
       - name: checkout
