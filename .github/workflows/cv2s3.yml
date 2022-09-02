@@ -18,7 +18,7 @@ jobs:
         with:
          role-to-assume: arn:aws:iam::267231704888:role/role_rw_shae256
          role-session-name: delivery
-         role-duration-seconds: 100
+         role-duration-seconds: 900
          aws-region: 'eu-west-3'
 
       - name: checkout
