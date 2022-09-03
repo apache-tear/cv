@@ -16,14 +16,14 @@ jobs:
       - name: configureawscredentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-         role-to-assume: arn:aws:iam::267231704888:role/role_rw_shae256
+         role-to-assume: ${{ secrets.ROLE_ARN }}
          role-session-name: delivery
          role-duration-seconds: 900
-         aws-region: 'eu-west-3'
+         aws-region: 'us-east-1'
 
       - name: checkout
         uses: actions/checkout@v3
         
       - name: s3upload
         run: | 
-          aws s3 cp --recursive ./static s3://shae256
+          aws s3 cp --recursive ./static ${{ secrets.BUCKET_URL }}
