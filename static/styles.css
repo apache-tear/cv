@@ -4,11 +4,11 @@ body {
 
 a:link {
     text-decoration: none;
-    color: rgb(33, 64, 89);
+    color: rgb(33, 55, 89);
 }
   
 a:visited {
-    color: rgb(143, 113, 31);
+    color: rgba(108, 64, 6, 0.966);
 }
   
 a:hover {
@@ -63,7 +63,7 @@ a:hover {
 
 .h-name {
     text-align: left;
-    color: rgb(79, 50, 45);
+    color: rgba(108, 64, 6, 0.966);
     font-family: 'Suwannaphum', serif;
 }
 
