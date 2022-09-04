@@ -11,18 +11,27 @@ permissions:
 jobs:
   terraform:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./terraform
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        
+
+      - name: Add profile credentials to ~/.aws/credentials
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} --profile default
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} --profile default
+
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v2
         with:
           cli_config_credentials_token: ${{ secrets.TF_GH_TOKEN }}
       
       - name: Terraform Format
         id: fmt
         run: terraform fmt -check
+        continue-on-error: true
 
       - name: Terraform Init
         id: init
@@ -38,42 +47,12 @@ jobs:
         run: terraform plan -no-color -input=false
         continue-on-error: true
       
-      - name: Update Pull Request
-        uses: actions/github-script@6
-        if: github.event_name == 'pull_request'
-        env:
-          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
-        with:
-          github-token: ${{ secrets.MY_TOKEN }}
-          script: |
-            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-            #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
-
-            <details><summary>Show Plan</summary>
-
-            \`\`\`\n
-            ${process.env.PLAN}
-            \`\`\`
-
-            </details>
-
-            *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: output
-            })
-      
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/terraform' && github.event_name == 'push'
+        if: github.event_name == 'pull_request'
         run: terraform apply -auto-approve -input=false
 
       - name: Terraform Outputs
@@ -83,4 +62,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: output
-          path: output.txt   
+          path: terraform/output.txt   
