@@ -1,5 +1,3 @@
-#Setting up S3 bucket
-
 variable "bucket_name" {
   type    = string
   default = "a-sh.ae"
