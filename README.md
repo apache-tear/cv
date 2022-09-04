@@ -1,9 +1,11 @@
-Static web page with my CV hosted on S3.
+Static web page with my CV hosted on S3
+https://www.a-sh.ae
 
-Using Terraform for provisioning: 
-S3 bucket, CloudFront distribution, ACM certificate, R53 hosted zone & records.
+Using 2 separate CI pipelines:
 
-Using GitHub Actions on pull requests, workflow:
+Branch "static" uses GitHub Actions on PRs to:
 1. Assume AWS role with min privileges using creds stored in GH secrets.
 2. Checkout repo.
-3. Upload static files to the bucket.
+3. Upload static files to the S3 bucket.
+
+Branch "terraform" provisions TF infrastructure on changes.
