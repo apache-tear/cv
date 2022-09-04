@@ -16,7 +16,7 @@ jobs:
       - name: configureawscredentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-         role-to-assume: ${{ secrets.ROLE_ARN }}
+         role-to-assume: "arn:aws:iam::267231704888:role/gh_role" #${{ secrets.ROLE_ARN }}
          role-session-name: delivery
          role-duration-seconds: 900
          aws-region: 'us-east-1'
