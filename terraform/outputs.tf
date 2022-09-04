@@ -1,21 +1,6 @@
-output "bucket_arn" {
-  description = "Bucket ARN"
-  value       = aws_s3_bucket.cvbucket.arn
-}
-
-output "bucket_id" {
-  description = "Bucket ID"
-  value       = aws_s3_bucket.cvbucket.id
-}
-
 output "ns_servers" {
   description = "NS servers"
   value       = aws_route53_zone.zone.name_servers
-}
-
-output "validation_record_domain_name" {
-  description = "Validation domain name"
-  value       = tolist(aws_acm_certificate.cert.domain_validation_options)[0].domain_name
 }
 
 output "validation_record_name" {
