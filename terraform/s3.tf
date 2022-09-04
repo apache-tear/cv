@@ -6,7 +6,7 @@ variable "bucket_name" {
 }
 
 resource "aws_s3_bucket" "cvbucket" {
-  bucket = "${var.bucket_name}"
+  bucket = var.bucket_name
 }
 
 resource "aws_s3_bucket_versioning" "versioning_enabled" {

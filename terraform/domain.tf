@@ -1,16 +1,16 @@
-#1.Create hosted zone -> Get NS -> Configure domain (custom registrar)
+#1. Create hosted zone -> Get NS -> Configure domain (custom registrar)
 #2. Request ACM SSL cert -> Validate DNS
 #3. Create alias records in Route53
 
 resource "aws_route53_zone" "zone" {
-  name = "${var.bucket_name}"
+  name = var.bucket_name
 }
 
 resource "aws_acm_certificate" "cert" {
   domain_name               = var.bucket_name
   subject_alternative_names = ["*.${var.bucket_name}"]
   validation_method         = "DNS"
-  
+
   tags = {
     Name = var.bucket_name
   }
@@ -25,8 +25,8 @@ resource "aws_acm_certificate_validation" "validation" {
 }
 
 resource "aws_route53_record" "name" {
-  zone_id = "${aws_route53_zone.zone.zone_id}"
-  name    = "${var.bucket_name}"
+  zone_id = aws_route53_zone.zone.zone_id
+  name    = var.bucket_name
   type    = "A"
 
   alias {
@@ -37,7 +37,7 @@ resource "aws_route53_record" "name" {
 }
 
 resource "aws_route53_record" "wwwname" {
-  zone_id = "${aws_route53_zone.zone.zone_id}"
+  zone_id = aws_route53_zone.zone.zone_id
   name    = "www.${var.bucket_name}"
   type    = "A"
 

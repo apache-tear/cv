@@ -1,7 +1,10 @@
 locals {
-  s3_origin_id = "${var.bucket_name}"
+  s3_origin_id = var.bucket_name
 }
 
+resource "aws_cloudfront_origin_access_identity" "oai" {
+  comment = "Terraform"
+}
 
 resource "aws_cloudfront_distribution" "distribution" {
   origin {
@@ -9,7 +12,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     origin_id   = local.s3_origin_id
 
     s3_origin_config {
-      origin_access_identity = "${aws_cloudfront_origin_access_identity.oai.cloudfront_access_identity_path}"
+      origin_access_identity = aws_cloudfront_origin_access_identity.oai.cloudfront_access_identity_path
     }
   }
 
@@ -30,13 +33,13 @@ resource "aws_cloudfront_distribution" "distribution" {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.s3_origin_id
-    compress = true
-    
+    compress         = true
+
     forwarded_values {
       query_string = false
 
       cookies {
-      forward = "none"
+        forward = "none"
       }
     }
 
@@ -45,7 +48,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     default_ttl            = 300
     max_ttl                = 86400
   }
-    
+
   restrictions {
     geo_restriction {
       restriction_type = "none"

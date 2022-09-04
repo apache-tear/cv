@@ -1,17 +1,16 @@
 output "bucket_arn" {
-    description = "Bucket ARN"
-    value       = "${aws_s3_bucket.cvbucket.arn}"
+  description = "Bucket ARN"
+  value       = aws_s3_bucket.cvbucket.arn
 }
 
 output "bucket_id" {
-    description = "Bucket ID"
-    value       = "${aws_s3_bucket.cvbucket.id}"
+  description = "Bucket ID"
+  value       = aws_s3_bucket.cvbucket.id
 }
 
-
 output "ns_servers" {
-    description = "NS servers"
-    value       = "${aws_route53_zone.zone.name_servers}"
+  description = "NS servers"
+  value       = aws_route53_zone.zone.name_servers
 }
 
 output "validation_record_domain_name" {
@@ -35,11 +34,16 @@ output "validation_record_value" {
 }
 
 output "cert_arn" {
-    description = "Cert ARN"
-    value       = "${aws_acm_certificate.cert.arn}"
+  description = "Cert ARN"
+  value       = aws_acm_certificate.cert.arn
 }
 
 output "cf_distribution_arn" {
-    description = "CF Distribution ARN"
-    value       = "${aws_cloudfront_distribution.distribution.arn}"
+  description = "CF Distribution ARN"
+  value       = aws_cloudfront_distribution.distribution.arn
+}
+
+output "gh_role_arn" {
+  description = "GH Role ARN"
+  value       = aws_iam_role.gh_role.arn
 }
