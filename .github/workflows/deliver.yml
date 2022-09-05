@@ -36,7 +36,7 @@ jobs:
          role-to-assume: ${{ env.ROLE_ARN }}
          role-session-name: delivery
          role-duration-seconds: 900
-         aws-region: '${{ env.REGION }}'
+         aws-region: ${{ env.REGION }}
 
       - name: checkout
         uses: actions/checkout@v3
