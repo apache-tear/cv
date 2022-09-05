@@ -14,6 +14,7 @@ I. Branch "Terraform" <br/>
 
 II. Branch "Static" <br>
     GitHub Actions provides the following workflow on pushes:
+    
     - Parse TF outputs from GH Artifacts.
     - Assume AWS role with least privileges.
     - Checkout repo.
