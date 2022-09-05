@@ -20,7 +20,6 @@ jobs:
           github_token: ${{secrets.GITHUB_TOKEN}}
           workflow: provision.yml
           workflow_conclusion: success
-          branch: master
           path: ./
           name: output.txt
 
