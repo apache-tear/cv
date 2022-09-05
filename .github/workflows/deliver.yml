@@ -43,4 +43,4 @@ jobs:
         
       - name: s3upload
         run: | 
-          aws s3 cp --recursive ./static ${{ env.BUCKET_URL }}
+          aws s3 cp --recursive ./static s3://${{ env.BUCKET_URL }}

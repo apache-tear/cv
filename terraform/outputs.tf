@@ -38,5 +38,5 @@ output "region" {
 }
 
 output "bucket_url" {
-  value = aws_s3_bucket.cvbucket.bucket_domain_name
+  value = aws_s3_bucket.cvbucket.id
 }
