@@ -3,3 +3,6 @@ Disallow: /
 
 User-agent: AdsBot-Google
 Disallow: /
+
+User-agent: Bing
+Disallow: /
