@@ -2,7 +2,7 @@ name: provision
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: [ "terraform" ]
 
 permissions:
     id-token: write
