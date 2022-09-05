@@ -22,6 +22,7 @@ jobs:
           workflow_conclusion: success
           branch: master
           path: ./
+          name: output.txt
 
       - name: Parse artifact data
         run: | 
