@@ -17,3 +17,5 @@ II. Branch "Static" <br>
     - Assume AWS role with min privileges using creds stored in GH secrets.
     - Checkout repo.
     - Upload static files to the S3 bucket.
+
+CIs use GH Actions Artifacts for inter workflow communication, no hardcoded/sensitive values passed in plain form.
