@@ -33,14 +33,14 @@ jobs:
       - name: configureawscredentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-         role-to-assume: ${{ env.ROLE_ARN }}
+         role-to-assume: $ROLE_ARN
          role-session-name: delivery
          role-duration-seconds: 900
-         aws-region: ${{ env.REGION }}
+         aws-region: $REGION
 
       - name: checkout
         uses: actions/checkout@v3
         
       - name: s3upload
         run: | 
-          aws s3 cp --recursive ./static ${{ env.BUCKET_URL }}
+          aws s3 cp --recursive ./static $BUCKET_URL
