@@ -21,3 +21,5 @@ provider "aws" {
   shared_credentials_files = ["~/.aws/credentials"]
   profile                  = "default"
 }
+
+data "aws_region" "current" {}
