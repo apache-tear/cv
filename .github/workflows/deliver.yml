@@ -2,7 +2,7 @@ name: deliver
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "static" ]
 
 permissions:
     id-token: write
