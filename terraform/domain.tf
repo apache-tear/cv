@@ -27,7 +27,7 @@ locals {
 }
 
 resource "aws_route53_record" "to_CF" {
-  zone_id = locals.zone.zone_id
+  zone_id = local.zone.zone_id
   name    = var.domain
   type    = "A"
 
@@ -39,7 +39,7 @@ resource "aws_route53_record" "to_CF" {
 }
 
 resource "aws_route53_record" "www_to_CF" {
-  zone_id = locals.zone.zone_id
+  zone_id = local.zone.zone_id
   name    = "www.${var.domain}"
   type    = "A"
 
