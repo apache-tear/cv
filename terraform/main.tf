@@ -33,3 +33,5 @@ data "terraform_remote_state" "domain" {
     }
   }
 }
+
+data "aws_region" "current" {}
