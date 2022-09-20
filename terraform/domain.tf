@@ -1,18 +1,16 @@
-#1. Create hosted zone -> Get NS -> Configure domain (custom registrar)
-#2. Request ACM SSL cert -> Validate DNS
-#3. Create alias records in Route53
+# Hosted zone data pulled from centralized domain control workspace.
 
-resource "aws_route53_zone" "zone" {
-  name = var.bucket_name
+/*resource "aws_route53_zone" "zone" {
+  name = var.domain
 }
 
 resource "aws_acm_certificate" "cert" {
-  domain_name               = var.bucket_name
-  subject_alternative_names = ["*.${var.bucket_name}"]
+  domain_name               = var.domain
+  subject_alternative_names = ["*.${var.domain}"]
   validation_method         = "DNS"
 
   tags = {
-    Name = var.bucket_name
+    Name = var.domain
   }
 
   lifecycle {
@@ -22,11 +20,15 @@ resource "aws_acm_certificate" "cert" {
 
 resource "aws_acm_certificate_validation" "validation" {
   certificate_arn = aws_acm_certificate.cert.arn
+}*/
+
+locals {
+  zone = data.terraform_remote_state.domain.outputs.zone
 }
 
-resource "aws_route53_record" "name" {
-  zone_id = aws_route53_zone.zone.zone_id
-  name    = var.bucket_name
+resource "aws_route53_record" "to_CF" {
+  zone_id = locals.zone.zone_id
+  name    = var.domain
   type    = "A"
 
   alias {
@@ -36,9 +38,9 @@ resource "aws_route53_record" "name" {
   }
 }
 
-resource "aws_route53_record" "wwwname" {
-  zone_id = aws_route53_zone.zone.zone_id
-  name    = "www.${var.bucket_name}"
+resource "aws_route53_record" "www_to_CF" {
+  zone_id = locals.zone.zone_id
+  name    = "www.${var.domain}"
   type    = "A"
 
   alias {

@@ -1,4 +1,4 @@
-output "ns_servers" {
+/*output "ns_servers" {
   description = "NS servers"
   value       = aws_route53_zone.zone.name_servers
 }
@@ -21,7 +21,7 @@ output "validation_record_value" {
 output "cert_arn" {
   description = "Cert ARN"
   value       = aws_acm_certificate.cert.arn
-}
+}*/
 
 output "cf_distribution_arn" {
   description = "CF Distribution ARN"
@@ -31,10 +31,6 @@ output "cf_distribution_arn" {
 output "gh_role_arn" {
   description = "GH Role ARN"
   value       = aws_iam_role.gh_role.arn
-}
-
-output "region" {
-  value = data.aws_region.current
 }
 
 output "bucket_url" {

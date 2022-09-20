@@ -1,7 +1,3 @@
-locals {
-  s3_origin_id = var.bucket_name
-}
-
 resource "aws_cloudfront_origin_access_identity" "oai" {
   comment = "Terraform"
 }
@@ -9,7 +5,7 @@ resource "aws_cloudfront_origin_access_identity" "oai" {
 resource "aws_cloudfront_distribution" "distribution" {
   origin {
     domain_name = aws_s3_bucket.cvbucket.bucket_regional_domain_name
-    origin_id   = local.s3_origin_id
+    origin_id   = var.domain
 
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.oai.cloudfront_access_identity_path
@@ -23,16 +19,16 @@ resource "aws_cloudfront_distribution" "distribution" {
 
   logging_config {
     include_cookies = false
-    bucket          = "${var.bucket_name}.s3.amazonaws.com"
+    bucket          = "${var.domain}.s3.amazonaws.com"
     prefix          = "logs"
   }
 
-  aliases = ["${var.bucket_name}", "www.${var.bucket_name}"]
+  aliases = ["${var.domain}", "www.${var.domain}"]
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = local.s3_origin_id
+    target_origin_id = var.domain
     compress         = true
 
     forwarded_values {
@@ -60,7 +56,7 @@ resource "aws_cloudfront_distribution" "distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn = aws_acm_certificate.cert.arn
+    acm_certificate_arn = data.terraform_remote_state.domain.outputs.cert.arn
     ssl_support_method  = "sni-only"
   }
 }

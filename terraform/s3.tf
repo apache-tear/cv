@@ -1,10 +1,37 @@
-variable "bucket_name" {
+variable "domain" {
   type    = string
   default = "a-sh.ae"
 }
 
+#S3 bucket policy
+data "aws_iam_policy_document" "s3_policy" {
+  #Perms for CF to get objects
+  statement {
+    sid       = "AllowCloudFrontServicePrincipalReadOnly"
+    actions   = ["s3:GetObject"]
+    resources = ["${aws_s3_bucket.cvbucket.arn}/*"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${aws_cloudfront_origin_access_identity.oai.iam_arn}"]
+    }
+  }
+
+  #Perms for GH Actions to put files into the bucket
+  statement {
+    sid       = "AllowGHPutActions"
+    actions   = ["s3:PutObject"]
+    resources = ["${aws_s3_bucket.cvbucket.arn}/*"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${aws_iam_role.gh_role.arn}"]
+    }
+  }
+}
+
 resource "aws_s3_bucket" "cvbucket" {
-  bucket = var.bucket_name
+  bucket = var.domain
 }
 
 resource "aws_s3_bucket_versioning" "versioning_enabled" {
